@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy element &apos;DimensionCrate.java&apos; to &apos;FightAndFeurios/src/dk.thorvaldemar.Crates&apos;&#x0D;&#x0A;- Original project: &apos;KitPVP&apos;&#x0D;&#x0A;- Destination element: &apos;FightAndFeurios/src/dk.thorvaldemar.Crates&apos;&#x0D;&#x0A;- Original element: &apos;me.thorvaldemar.Block.Crates.DimensionCrate.java&apos;" description="Copy compilation unit" destination="=FightAndFeurios/src&lt;dk.thorvaldemar.Crates" element1="/src&lt;me.thorvaldemar.Block.Crates{DimensionCrate.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1480596669540" units="1" version="1.0"/>
-</session>

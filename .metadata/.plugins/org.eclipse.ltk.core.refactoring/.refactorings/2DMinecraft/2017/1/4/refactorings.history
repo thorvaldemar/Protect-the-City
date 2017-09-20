@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy 2 elements to &apos;Konsis 2D/src/cam.thorvaldemar.test&apos;&#x0D;&#x0A;- Original project: &apos;2DMinecraft&apos;&#x0D;&#x0A;- Destination element: &apos;Konsis 2D/src/cam.thorvaldemar.test&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     cam.thorvaldemar.GameObjects.Blocks.Dirt.java&#x0D;&#x0A;     cam.thorvaldemar.GameObjects.Blocks.Grass.java" description="Copy compilation units" destination="=Konsis 2D/src&lt;cam.thorvaldemar.test" element1="/src&lt;cam.thorvaldemar.GameObjects.Blocks{Dirt.java" element2="/src&lt;cam.thorvaldemar.GameObjects.Blocks{Grass.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1485190006521" units="2" version="1.0"/>
-</session>

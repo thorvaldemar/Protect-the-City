@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Delete resource &apos;Youtube&apos;" deleteContents="false" description="Delete resource &apos;Youtube&apos;" element1="/Youtube" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1478723352182"/>
-</session>

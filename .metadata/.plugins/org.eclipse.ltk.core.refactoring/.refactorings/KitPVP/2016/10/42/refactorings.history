@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy element &apos;Chat.java&apos; to &apos;FightAndFeurios/src/dk.thorvaldemar.events&apos;&#x0D;&#x0A;- Original project: &apos;KitPVP&apos;&#x0D;&#x0A;- Destination element: &apos;FightAndFeurios/src/dk.thorvaldemar.events&apos;&#x0D;&#x0A;- Original element: &apos;me.thorvaldemar.Player.Chat.java&apos;" description="Copy compilation unit" destination="=FightAndFeurios/src&lt;dk.thorvaldemar.events" element1="/src&lt;me.thorvaldemar.Player{Chat.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1477175704745" units="1" version="1.0"/>
-</session>
