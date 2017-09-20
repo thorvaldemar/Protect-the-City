@@ -1,0 +1,5 @@
+package dk.thorvaldemar.commands;
+
+public class ProtectCityC {
+
+}

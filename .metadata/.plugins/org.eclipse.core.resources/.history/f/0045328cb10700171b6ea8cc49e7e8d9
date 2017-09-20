@@ -1,0 +1,96 @@
+package me.thorvaldemar;
+
+import me.thorvaldemar.engine.Game;
+import me.thorvaldemar.engine.GameObject;
+import me.thorvaldemar.engine.Handler;
+import me.thorvaldemar.engine.Vector;
+
+import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.Random;
+
+import me.thorvaldemar.Entities.Player;
+import me.thorvaldemar.Entities.Zombies.NormalZombie;
+import me.thorvaldemar.Levels.Level1;
+
+public class Main {
+
+	static Player player = null;
+
+	public static int round = 1;
+
+	public GUI gui = new GUI();
+	
+	public void onEnable() {
+		System.out.println("The game has started");
+		//System.out.println(Game.imgDirectory);
+		Game.loadLevel(new Level1());
+		getPlayer();
+		// Game.backgroundColor = new Color(10, 7, 79);
+
+	}
+
+	public static void getPlayer() {
+		for (GameObject obj : Handler.getAllGameObjects()) {
+			if (obj.getClass() == Player.class) {
+				player = (Player) obj;
+				break;
+			}
+		}
+	}
+	
+	public void update() {
+		int zombies = 0;
+
+		ArrayList<GameObject> objects = new ArrayList<GameObject>();
+
+		for (GameObject obj : Handler.unRenderedObject) {
+			objects.add(obj);
+		}
+
+		for (GameObject obj : objects) {
+			Handler.removeObject(obj);
+		}
+
+		for (GameObject obj : Handler.getAllGameObjects()) {
+
+			if (obj.getClass() == NormalZombie.class) {
+				zombies += 1;
+			}
+		}
+		if (zombies <= 0) {
+			round += 1;
+			nextRound();
+		}
+		
+		if (player.Health <= 0) {
+			Handler.paused = true;
+		}
+	}
+
+	public void onDisable() {
+
+	}
+
+	static Random r = new Random();
+
+	public static void nextRound() {
+		// int spawnPoint = r.nextInt(4);
+		for (int i = 0; i <= round * 2; i++) {
+			int x = r.nextInt(Game.WIDTH + 600) - 300;
+			int y = r.nextInt(Game.HEIGHT + 600) - 300;
+			while (x > 0 && x < Game.WIDTH) {
+				x = r.nextInt(Game.WIDTH + 600) - 300;
+			}
+			while (y > 0 && y < Game.HEIGHT) {
+				y = r.nextInt(Game.WIDTH + 600) - 300;
+			}
+			Handler.addObject(new NormalZombie(new Vector(x, y), new Vector(32, 32)));
+		}
+	}
+
+	public void onGUI(Graphics g) {
+		gui.renderer(g);
+	}
+
+}

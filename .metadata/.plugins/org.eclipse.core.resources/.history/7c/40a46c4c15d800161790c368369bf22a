@@ -1,0 +1,157 @@
+package cam.thorvaldemar;
+
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
+public abstract class GameObject {
+
+	protected boolean showCollide = false;
+	protected boolean isSolid = false;
+	protected boolean isExtended = false;
+	protected Vector position;
+	protected Vector velocity = new Vector(0, 0);
+	protected Vector collision;
+	protected BufferedImage image;
+	
+	protected int UUID;
+	
+	//if it is a block type
+	protected boolean isBlock;
+	protected int durability;
+	protected int procDura = durability;
+	
+	public GameObject(Vector position, Vector collision) {
+		this.position = position;
+		this.collision = collision;
+	}
+
+	public abstract void tick();
+
+	public abstract void render(Graphics g);
+
+	// Manipulate postitions
+
+	public void setPosition(Vector position) {
+		this.position.setX(position.X());
+		this.position.setY(position.Y());
+	}
+
+	public Vector position() {
+		return this.position;
+	}
+
+	// Manipulate ID
+
+	public Class<? extends GameObject> getType() {
+		return this.getClass();
+	}
+
+	// Manipulate velocity
+
+	public void setVelocity(Vector velocity) {
+		this.velocity = velocity;
+	}
+
+	public Vector velocity() {
+		return this.velocity;
+	}
+
+	// Manipulate size
+
+	public void setCollision(Vector collision) {
+		this.collision = collision;
+	}
+
+	public Vector getCollision() {
+		return this.collision;
+	}
+
+	// Manipulate solid
+	
+	public void setSolid(boolean statement) {
+		isSolid = statement;
+	}
+	
+	public boolean getSolid() {
+		return isSolid;
+	}
+	
+	// Manipulate solid
+	
+	public void setExtended(boolean statement) {
+		isExtended = statement;
+	}
+	
+	public boolean getExtended() {
+		return isExtended;
+	}
+	
+	// Manipulate image
+	
+	public void setImage(BufferedImage str) {
+		this.image = str;
+	}
+	
+	public BufferedImage getImage() {
+		return this.image;
+	}
+	
+	// Manipulate block type
+	
+	public boolean getBlock() {
+		return this.isBlock;
+	}
+	
+	public void setBlock(boolean statement) {
+		this.isBlock = statement;
+	}
+	
+	// Manipulate durability
+	
+	public void maxoutDurability() {
+		procDura = durability;
+	}
+	
+	public void setDurability(int dura) {
+		procDura = dura;
+	}
+	
+	public void removeDurability(int dura) {
+		procDura -= dura;
+	}
+	
+	public void addDurability(int dura) {
+		procDura += dura;
+	}
+	
+	public int getDurability() {
+		return procDura;
+	}
+	
+	// Colliding with others
+
+	
+
+	// Find GameObjects
+	
+	
+	//Implements
+	int gravityTimer = 5;
+	
+	public void gravity() {
+		if (gravityTimer <= 0) {
+			if (velocity.Y() < 16)
+				velocity().setY(velocity().Y() + 1);
+			gravityTimer = 5;
+		} else {
+			gravityTimer -= 1;
+		}
+	}
+	
+	// Others
+	public void destroy() {
+		Handler.removeObject(this);
+	}
+	
+	
+}

@@ -1,0 +1,9 @@
+main: dk.thorvaldemar.Main
+version: 1.0
+name: CityDefender
+
+commands:
+  bct:
+    description: broadcast title
+  selector:
+    description: manipulating selectors

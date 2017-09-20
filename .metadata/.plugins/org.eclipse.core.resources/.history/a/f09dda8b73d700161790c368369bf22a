@@ -1,0 +1,77 @@
+package cam.thorvaldemar;
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+
+public class Mouse implements MouseMotionListener, MouseListener {
+
+	static int x, y;
+
+	private Handler handler;
+
+	public Mouse(Handler handler) {
+		this.handler = handler;
+	}
+	
+	public void mouseDragged(MouseEvent e) {
+		if (x > 0) {
+			x = e.getX() + Game.camera.x;
+		} else {
+			x = e.getX() + Game.camera.x - 32;
+		}
+		
+		if (y > 0) {
+			y = e.getY() + Game.camera.y;
+		} else {
+			y = e.getY() + Game.camera.y - 32;
+		}
+	}
+
+	public void mouseMoved(MouseEvent e) {
+		if (x > 0) {
+			x = e.getX() + Game.camera.x;
+		} else {
+			x = e.getX() + Game.camera.x - 32;
+		}
+		
+		if (y > 0) {
+			y = e.getY() + Game.camera.y;
+		} else {
+			y = e.getY() + Game.camera.y - 32;
+		}
+	}
+	
+	//manipulate
+	public static int getX() {
+		return x;
+	}
+	
+	public static int getY() {
+		return y;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		
+	}
+
+	public void mousePressed(MouseEvent e) {
+		handler.onMouseDown(e.getButton());
+	}
+
+	public void mouseReleased(MouseEvent e) {
+		handler.onMouseUp(e.getButton());
+	}
+	
+}

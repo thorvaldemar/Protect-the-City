@@ -1,0 +1,235 @@
+package dk.thorvaldemar.Crates;
+
+import java.util.ArrayList;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import dk.thorvaldemar.Main;
+import dk.thorvaldemar.Crates.List.Common;
+import dk.thorvaldemar.Crates.List.Explosive;
+import dk.thorvaldemar.Crates.List.Mythical;
+import dk.thorvaldemar.Crates.List.Rare;
+import dk.thorvaldemar.Crates.List.Totems;
+import dk.thorvaldemar.Crates.List.Vote;
+import dk.thorvaldemar.enums.functions.getContent;
+import dk.thorvaldemar.enums.lists.Content;
+
+public class CrateGUI implements Listener {
+
+	private static Main plugin;
+
+	public CrateGUI(Main pl) {
+		plugin = pl;
+	}
+
+	public static Block block = null;
+
+	public static Inventory inv = Bukkit.createInventory(null, 27,
+			ChatColor.GOLD + "" + ChatColor.BOLD + "* CRATES *");;
+
+	@EventHandler
+	public void onInventoryClick(InventoryClickEvent e) {
+		Player p = (Player) e.getWhoClicked();
+		ItemStack clicked = e.getCurrentItem();
+		Inventory inventory = e.getInventory();
+		if (clicked.hasItemMeta()) {
+			if (inventory.getName().equals(inv.getName())) {
+				e.setCancelled(true);
+
+				if (isItem(clicked, 10)) {
+					if (plugin.getplayerdata().getInt(p.getName() + ".keys.vote") >= 1) {
+						p.closeInventory();
+						p.teleport(block.getLocation());
+						CratesLoops.isOpening.put(p, block);
+						Vote.cratesOpened.put(p, 1);
+						Vote.loadGround(block, p, plugin);
+						plugin.getplayerdata().set(p.getName() + ".keys.vote",
+								plugin.getplayerdata().getInt(p.getName() + ".keys.vote") - 1);
+					}
+				}
+
+				if (isItem(clicked, 11)) {
+					if (plugin.getplayerdata().getInt(p.getName() + ".keys.common") >= 1) {
+						p.closeInventory();
+						p.teleport(block.getLocation());
+						CratesLoops.isOpening.put(p, block);
+						Common.cratesOpened.put(p, 1);
+						Common.loadGround(block, p, plugin);
+						plugin.getplayerdata().set(p.getName() + ".keys.common",
+								plugin.getplayerdata().getInt(p.getName() + ".keys.common") - 1);
+					}
+				}
+
+				if (isItem(clicked, 12)) {
+					if (plugin.getplayerdata().getInt(p.getName() + ".keys.explosive") >= 1) {
+						p.closeInventory();
+						p.teleport(block.getLocation());
+						CratesLoops.isOpening.put(p, block);
+						Explosive.cratesOpened.put(p, 1);
+						Explosive.loadGround(block, p, plugin);
+						plugin.getplayerdata().set(p.getName() + ".keys.explosive",
+								plugin.getplayerdata().getInt(p.getName() + ".keys.explosive") - 1);
+					}
+				}
+
+				if (isItem(clicked, 14)) {
+					if (plugin.getplayerdata().getInt(p.getName() + ".keys.rare") >= 1) {
+						p.closeInventory();
+						p.teleport(block.getLocation());
+						CratesLoops.isOpening.put(p, block);
+						Rare.cratesOpened.put(p, 1);
+						Rare.loadGround(block, p, plugin);
+						plugin.getplayerdata().set(p.getName() + ".keys.rare",
+								plugin.getplayerdata().getInt(p.getName() + ".keys.rare") - 1);
+					}
+				}
+
+				if (isItem(clicked, 15)) {
+					if (plugin.getplayerdata().getInt(p.getName() + ".keys.totems") >= 1) {
+						p.closeInventory();
+						p.teleport(block.getLocation());
+						CratesLoops.isOpening.put(p, block);
+						Totems.cratesOpened.put(p, 1);
+						Totems.loadGround(block, p, plugin);
+						plugin.getplayerdata().set(p.getName() + ".keys.totems",
+								plugin.getplayerdata().getInt(p.getName() + ".keys.totems") - 1);
+					}
+				}
+
+				if (isItem(clicked, 16)) {
+					if (plugin.getplayerdata().getInt(p.getName() + ".keys.mythical") >= 1) {
+						p.closeInventory();
+						p.teleport(block.getLocation());
+						CratesLoops.isOpening.put(p, block);
+						Mythical.cratesOpened.put(p, 1);
+						Mythical.loadGround(block, p, plugin);
+						plugin.getplayerdata().set(p.getName() + ".keys.mythical",
+								plugin.getplayerdata().getInt(p.getName() + ".keys.mythical") - 1);
+					}
+				}
+
+				if (isItem(clicked, 26)) {
+					p.closeInventory();
+					return;
+				}
+
+				plugin.saveplayerdata();
+				setupInv(inv, p);
+			}
+		}
+	}
+
+	public static void openInventory(Player p, Block blocks) {
+		inv = Bukkit.createInventory(p, 27, ChatColor.GOLD + "" + ChatColor.BOLD + "* CRATES *");
+		p.openInventory(inv);
+		setupInv(inv, p);
+		block = blocks;
+	}
+
+	public static void setupInv(Inventory inv, Player p) {
+
+		// inv.setItem(4, createItem(p, Content.BOOTS, ChatColor.AQUA +
+		// "Boots"));
+
+		inv.setItem(10, createItem(Material.EMERALD, ChatColor.GREEN + "" + ChatColor.BOLD + "Vote crate",
+				plugin.getplayerdata().getInt(p.getName() + ".keys.vote")));
+		inv.setItem(11, createItem(Material.GLOWSTONE_DUST, ChatColor.YELLOW + "" + ChatColor.BOLD + "Common crate",
+				plugin.getplayerdata().getInt(p.getName() + ".keys.common")));
+		inv.setItem(12, createItem(Material.REDSTONE, ChatColor.DARK_RED + "" + ChatColor.BOLD + "Explosive crate",
+				plugin.getplayerdata().getInt(p.getName() + ".keys.explosive")));
+		inv.setItem(14, createItem(Material.SLIME_BALL, ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "Rare crate",
+				plugin.getplayerdata().getInt(p.getName() + ".keys.rare")));
+		inv.setItem(15, createItem(Material.DOUBLE_PLANT, ChatColor.GOLD + "" + ChatColor.BOLD + "Totem crate",
+				plugin.getplayerdata().getInt(p.getName() + ".keys.totems")));
+		inv.setItem(16, createItem(Material.NETHER_STAR, ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Mythical crate",
+				plugin.getplayerdata().getInt(p.getName() + ".keys.mythical")));
+
+		ItemStack back = new ItemStack(Material.WOOL, 1, (short) 14);
+		ItemMeta backMeta = back.getItemMeta();
+		backMeta.setDisplayName(ChatColor.DARK_RED + "" + ChatColor.BOLD + "<--CLOSE-->");
+		back.setItemMeta(backMeta);
+		inv.setItem(26, back);
+
+	}
+
+	public static ItemStack createItem(Material mat, String name, int money) {
+
+		ItemStack item = new ItemStack(mat, 1);
+		ItemMeta meta = item.getItemMeta();
+		meta.setDisplayName(name);
+		ArrayList<String> lore = new ArrayList<String>();
+		lore.add(ChatColor.YELLOW + "You have " + (money) + " keys for this crate");
+		lore.add(ChatColor.YELLOW + "You can see the prices on the website");
+		meta.setLore(lore);
+		item.setItemMeta(meta);
+
+		return item;
+	}
+
+	public static ItemStack createBarrier() {
+
+		ItemStack item = new ItemStack(Material.BARRIER, 1);
+		ItemMeta meta = item.getItemMeta();
+		meta.setDisplayName(ChatColor.DARK_RED + "" + ChatColor.BOLD + "UNKNOWN");
+		item.setItemMeta(meta);
+
+		return item;
+	}
+
+	public static ItemStack createItem(Player p, Content cont, String name) {
+		ItemStack item = getContent.getFRContent(cont).get(p);
+		ItemMeta meta = item.getItemMeta();
+		meta.setDisplayName(name);
+		item.setItemMeta(meta);
+
+		return item;
+	}
+
+	public static ItemStack maxedItem(Material mat, Enchantment ench, int level) {
+
+		ItemStack item = new ItemStack(mat, 1);
+		ItemMeta meta = item.getItemMeta();
+		meta.setDisplayName(ChatColor.DARK_RED + "" + ChatColor.BOLD + "You have maxed out " + ench.getName());
+		meta.addEnchant(Enchantment.LUCK, 10, true);
+		item.setItemMeta(meta);
+
+		return item;
+	}
+
+	boolean haveMoney(int money, Player p) {
+		if (plugin.getplayerdata().getInt(p.getName() + ".money") >= money) {
+			return true;
+		}
+		return false;
+	}
+
+	void removeMoney(int money, Player p) {
+		plugin.getplayerdata().set(p.getName() + ".money",
+				(plugin.getplayerdata().getInt(p.getName() + ".money") - money));
+	}
+
+	boolean isItem(ItemStack clicked, int itemNum) {
+
+		if (inv.getItem(itemNum) == null) {
+			return false;
+		} else if (!inv.getItem(itemNum).hasItemMeta()) {
+			return false;
+		}
+		if (clicked.hasItemMeta()) {
+			return true;
+		}
+		return false;
+	}
+
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;GameObject.java&apos; to &apos;cam.thorvaldemar.GameObject.java&apos;&#x0D;&#x0A;- Original project: &apos;Konsis 2D&apos;&#x0D;&#x0A;- Destination element: &apos;cam.thorvaldemar.GameObject.java&apos;&#x0D;&#x0A;- Original element: &apos;cam.thorvaldemar.GameObject.java&apos;" description="Copy compilation unit" destination="/src&lt;cam.thorvaldemar{GameObject.java" element1="/src&lt;cam.thorvaldemar{GameObject.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1485893007383" units="1" version="1.0"/>
+</session>

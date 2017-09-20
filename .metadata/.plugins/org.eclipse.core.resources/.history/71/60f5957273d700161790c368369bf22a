@@ -1,0 +1,188 @@
+package cam.thorvaldemar;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.LinkedList;
+
+public class Handler {
+
+	static LinkedList<GameObject> object = new LinkedList<GameObject>();
+
+	boolean mouseClicked = false;
+	int mouseButton = 0;
+
+	public void tick() {
+		if (mouseClicked) {
+			onMouse(mouseButton);
+		}
+		for (int i = 0; i < object.size(); i++) {
+			GameObject tempObject = object.get(i);
+
+			if (tempObject != null) {
+				if (tempObject.position.X() - 32 > Game.camera.x
+						&& tempObject.position.X() < Game.camera.x + Game.WIDTH) {
+					if (tempObject.position.Y() - 32 > Game.camera.y
+							&& tempObject.position.Y() < Game.camera.y + Game.HEIGHT) {
+
+						tempObject.position().setX((tempObject.position().X() + tempObject.velocity().X()));
+						tempObject.position().setY((tempObject.position().Y() + tempObject.velocity().Y()));
+
+						tempObject.tick();
+					}
+				}
+			}
+		}
+	}
+
+	public void render(Graphics g) {
+		for (int i = 0; i < object.size(); i++) {
+			GameObject tempObject = object.get(i);
+
+			if (tempObject.position.X() - 32 > Game.camera.x && tempObject.position.X() < Game.camera.x + Game.WIDTH) {
+				if (tempObject.position.Y() - 32 > Game.camera.y
+						&& tempObject.position.Y() < Game.camera.y + Game.HEIGHT) {
+					tempObject.render(g);
+					if (tempObject.showCollide) {
+						g.setColor(Color.GREEN);
+						g.drawRect(tempObject.position.X(), tempObject.position.Y(), tempObject.collision.X(),
+								tempObject.collision.Y());
+					}
+				}
+			}
+		}
+	}
+
+	static ArrayList<Integer> key = new ArrayList<Integer>();
+
+	static LinkedList<GameObject> extendedObject = new LinkedList<GameObject>();
+
+	public void keyDown(int key) {
+		if (!Handler.key.contains(key)) {
+			for (int i = 0; i < extendedObject.size(); i++) {
+				GameObject tempObject = extendedObject.get(i);
+
+				try {
+					Method method = tempObject.getClass().getMethod("onKeyDown", int.class);
+					method.invoke(tempObject, key);
+				} catch (NoSuchMethodException e) {
+				} catch (IllegalAccessException e) {
+				} catch (IllegalArgumentException e) {
+				} catch (InvocationTargetException e) {
+				}
+
+			}
+			Handler.key.add(key);
+		}
+	}
+
+	public void key(int key) {
+		for (int i = 0; i < extendedObject.size(); i++) {
+			GameObject tempObject = extendedObject.get(i);
+
+			try {
+				Method method = tempObject.getClass().getMethod("onKey", int.class);
+				method.invoke(tempObject, key);
+			} catch (NoSuchMethodException e) {
+			} catch (IllegalAccessException e) {
+			} catch (IllegalArgumentException e) {
+			} catch (InvocationTargetException e) {
+			}
+
+		}
+	}
+
+	public void keyUp(int key) {
+		for (int i = 0; i < Handler.key.size(); i++) {
+			if (Handler.key.get(i) == key) {
+				Handler.key.remove(i);
+			}
+		}
+		for (int i = 0; i < extendedObject.size(); i++) {
+			GameObject tempObject = extendedObject.get(i);
+
+			try {
+				Method method = tempObject.getClass().getMethod("onKeyUp", int.class);
+				method.invoke(tempObject, key);
+			} catch (NoSuchMethodException e) {
+			} catch (IllegalAccessException e) {
+			} catch (IllegalArgumentException e) {
+			} catch (InvocationTargetException e) {
+			}
+
+		}
+	}
+
+	public void onMouseDown(int mouse) {
+		mouseButton = mouse;
+		mouseClicked = true;
+		for (int i = 0; i < extendedObject.size(); i++) {
+			GameObject tempObject = extendedObject.get(i);
+
+			try {
+				Method method = tempObject.getClass().getMethod("onMouseDown", int.class);
+				method.invoke(tempObject, mouse);
+			} catch (NoSuchMethodException e) {
+			} catch (IllegalAccessException e) {
+			} catch (IllegalArgumentException e) {
+			} catch (InvocationTargetException e) {
+			}
+
+		}
+	}
+
+	public void onMouse(int mouse) {
+		for (int i = 0; i < extendedObject.size(); i++) {
+			GameObject tempObject = extendedObject.get(i);
+
+			try {
+				Method method = tempObject.getClass().getMethod("onMouse", int.class);
+				method.invoke(tempObject, mouse);
+			} catch (NoSuchMethodException e) {
+			} catch (IllegalAccessException e) {
+			} catch (IllegalArgumentException e) {
+			} catch (InvocationTargetException e) {
+			}
+
+		}
+	}
+
+	public void onMouseUp(int mouse) {
+		mouseButton = mouse;
+		mouseClicked = false;
+		for (int i = 0; i < extendedObject.size(); i++) {
+			GameObject tempObject = extendedObject.get(i);
+
+			try {
+				Method method = tempObject.getClass().getMethod("onMouseUp", int.class);
+				method.invoke(tempObject, mouse);
+			} catch (NoSuchMethodException e) {
+			} catch (IllegalAccessException e) {
+			} catch (IllegalArgumentException e) {
+			} catch (InvocationTargetException e) {
+			}
+
+		}
+	}
+
+	public static void addObject(GameObject object) {
+		Handler.object.add(object);
+		if (object.isExtended) {
+			Handler.extendedObject.add(object);
+		}
+	}
+
+	public static void removeObject(GameObject object) {
+		Handler.object.remove(object);
+		if (object.isExtended) {
+			Handler.extendedObject.remove(object);
+		}
+	}
+
+	public static LinkedList<GameObject> getAllGameObjects() {
+		return object;
+	}
+
+}

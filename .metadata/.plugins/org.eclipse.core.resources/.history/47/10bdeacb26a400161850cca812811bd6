@@ -1,0 +1,86 @@
+package dk.thorvaldemar.Crates;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
+import org.inventivetalent.particle.ParticleEffect;
+
+public class CratesLoops extends BukkitRunnable {
+	public void run() {
+
+		if (true) {
+			int range = 30;
+
+			double x1 = 624.5;
+			double y1 = 4;
+			double z1 = -182.5;
+
+			Block target = new Location(Bukkit.getWorld("world"), x1, 30, z1).getBlock();
+
+			double x2 = ((target.getLocation().getX() + 0.5) - x1) / range;
+			double y2 = ((target.getLocation().getY() + 1) - y1) / range;
+			double z2 = ((target.getLocation().getZ() + 0.5) - z1) / range;
+
+			for (int i = 1; i <= range; i += 1) {
+				x1 += x2;
+				y1 += y2;
+				z1 += z2;
+
+				ParticleEffect.PORTAL.send(Bukkit.getOnlinePlayers(),
+						new Location(Bukkit.getWorld("world"), x1, y1, z1), 0f, 0f, 0f, 0.1, 10);
+			}
+
+			for (Player p : Bukkit.getOnlinePlayers()) {
+				if (p.getLocation().getX() >= (x1 - 0.2) && p.getLocation().getX() <= (x1 + 0.2)) {
+					if (p.getLocation().getY() >= 3 && p.getLocation().getY() <= 31) {
+						if (p.getLocation().getZ() <= (z1 - 0.2) && p.getLocation().getZ() >= (z1 - 0.2)) {
+							if (!p.isSneaking()) {
+								p.setVelocity(new Vector(p.getVelocity().getX(), 0.3, p.getVelocity().getZ()));
+							}
+						}
+					}
+				}
+			}
+		}
+
+		if (true) {
+			int range = 30;
+
+			double x1 = 251.5;
+			double y1 = 4;
+			double z1 = -298.5;
+
+			Block target = new Location(Bukkit.getWorld("world"), 251.5, 42, -298.5).getBlock();
+
+			double x2 = ((target.getLocation().getX() + 0.5) - x1) / range;
+			double y2 = ((target.getLocation().getY() + 1) - y1) / range;
+			double z2 = ((target.getLocation().getZ() + 0.5) - z1) / range;
+
+			for (int i = 1; i <= range; i += 1) {
+				x1 += x2;
+				y1 += y2;
+				z1 += z2;
+
+				ParticleEffect.PORTAL.send(Bukkit.getOnlinePlayers(),
+						new Location(Bukkit.getWorld("world"), x1, y1, z1), 0f, 0f, 0f, 0.1, 10);
+			}
+
+			for (Player p : Bukkit.getOnlinePlayers()) {
+				if (p.getLocation().getX() >= 251.3 && p.getLocation().getX() <= 251.7) {
+					if (p.getLocation().getY() >= 3 && p.getLocation().getY() <= 42) {
+						if (p.getLocation().getZ() <= -298.3 && p.getLocation().getZ() >= -298.7) {
+							if (!p.isSneaking()) {
+								p.setVelocity(new Vector(p.getVelocity().getX(), 0.3, p.getVelocity().getZ()));
+							}
+						}
+					}
+				}
+			}
+		}
+		
+	}
+
+}

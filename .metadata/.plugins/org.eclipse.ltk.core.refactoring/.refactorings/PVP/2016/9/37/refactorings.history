@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Loops.java&apos; to &apos;Protect the city/src/dk.thorvaldemar&apos;&#x0D;&#x0A;- Original project: &apos;PVP&apos;&#x0D;&#x0A;- Destination element: &apos;Protect the city/src/dk.thorvaldemar&apos;&#x0D;&#x0A;- Original element: &apos;me.thorvaldemar.Loops.java&apos;" description="Copy compilation unit" destination="=Protect the city/src&lt;dk.thorvaldemar" element1="/src&lt;me.thorvaldemar{Loops.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1473790123420" units="1" version="1.0"/>
+</session>

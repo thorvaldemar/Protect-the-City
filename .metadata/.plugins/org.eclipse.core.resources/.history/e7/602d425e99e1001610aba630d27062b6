@@ -1,0 +1,24 @@
+package cam.thorvaldemar.test;
+
+import cam.thorvaldemar.Game;
+import cam.thorvaldemar.Handler;
+import cam.thorvaldemar.Level;
+import cam.thorvaldemar.Vector;
+
+public class testLevel extends Level {
+
+	@Override
+	public void load() {
+		Handler.addObject(new Grass(new Vector(0, 0), new Vector(32, 32)));
+		Handler.addObject(new Grass(new Vector(32, 0), new Vector(32, 32)));
+		Handler.addObject(new Grass(new Vector(64, 0), new Vector(32, 32)));
+		Handler.addObject(new Grass(new Vector(96, 0), new Vector(32, 32)));
+		Handler.addObject(new Grass(new Vector(0, 32), new Vector(32, 32)));
+		Handler.addObject(new Grass(new Vector(0, 64), new Vector(32, 32)));
+		Handler.addObject(new Grass(new Vector(0, 96), new Vector(32, 32)));
+		Handler.addObject(new Grass(new Vector(32, 32), new Vector(32, 32)));
+		Handler.addObject(new Grass(new Vector(32, 64), new Vector(32, 32)));
+		Handler.addObject(new Grass(new Vector(64, 32), new Vector(32, 32)));
+	}
+	
+}
