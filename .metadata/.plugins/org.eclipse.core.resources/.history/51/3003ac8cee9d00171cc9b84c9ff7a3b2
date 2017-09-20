@@ -17,11 +17,9 @@ public class ProtectCityC implements CommandExecutor {
 				 * 			  Player			*
 				 ********************************/
 				
-				Player p = (Player) sender;
-				
 				if (args.length == 1) {
 					if (args[0].equalsIgnoreCase("hall")) {
-						p.sendMessage(ChatColor.RED + "You do not own a city yet");
+
 					}
 				} else if (args.length == 0) {
 					((Player) sender).sendMessage(ChatColor.RED + "/" + label + " [hall:create:remove:team]");
