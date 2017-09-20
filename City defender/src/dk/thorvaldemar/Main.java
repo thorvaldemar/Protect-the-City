@@ -21,12 +21,14 @@ public class Main extends JavaPlugin {
 	ScoreboardLoop scoreboardLoops;
 	
 	public static Config Cities;
+	public static Config userData;
 
 	public void onEnable() {
 		// name = (HashMap<Block, Towers>) load(new File(getDataFolder(),
 		// "NameStats.dat"));
 
 		Cities = new Config(this, "CitiesList");
+		userData = new Config(this, "userData");
 		
 		registerCommands();
 		registerEvents();
@@ -46,6 +48,12 @@ public class Main extends JavaPlugin {
 		}
 	}
 
+	public static boolean hasCity(Player p) {
+		if (userData.get().getBoolean(p.getName() + ".hasCity"))
+			return true;
+		return false;
+	}
+	
 	public void registerCommands() {
 		getCommand("bct").setExecutor(new broadcastTitle());
 		getCommand("selector").setExecutor(new SelectorC());

@@ -5,6 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import dk.thorvaldemar.Main;
 import net.md_5.bungee.api.ChatColor;
 
 public class ProtectCityC implements CommandExecutor {
@@ -21,7 +22,12 @@ public class ProtectCityC implements CommandExecutor {
 				
 				if (args.length == 1) {
 					if (args[0].equalsIgnoreCase("hall")) {
-						p.sendMessage(ChatColor.RED + "You do not have a city yet. \"/ + " + label + " create\" to create a new city");
+						if (Main.hasCity(p)) {
+							//Så send dem dog hjem!
+							p.sendMessage(ChatColor.GOLD + "You have been sent home to your city");
+						} else {
+							p.sendMessage(ChatColor.RED + "You do not have a city yet. \"/ + " + label + " create\" to create a new city");
+						}
 					} else {
 						p.sendMessage(ChatColor.RED + "Wrong arguments. \"/ + " + label + "\" for more help");
 					}
