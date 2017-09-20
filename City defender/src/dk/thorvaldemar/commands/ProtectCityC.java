@@ -18,7 +18,7 @@ public class ProtectCityC implements CommandExecutor {
 				 ********************************/
 				
 				if (args.length == 1) {
-					if (args[0].equalsIgnoreCase("")) {
+					if (args[0].equalsIgnoreCase("hall")) {
 
 					}
 				} else if (args.length == 0) {
