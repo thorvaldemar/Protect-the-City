@@ -22,6 +22,8 @@ public class ProtectCityC implements CommandExecutor {
 				if (args.length == 1) {
 					if (args[0].equalsIgnoreCase("hall")) {
 						p.sendMessage(ChatColor.RED + "You do not have a city yet. \"/ + " + label + " create\" to create a new city");
+					} else {
+						p.sendMessage(ChatColor.RED + "Wrong arguments. \"/ + " + label + "\" for more help");
 					}
 				} else if (args.length == 0) {
 					((Player) sender).sendMessage(ChatColor.RED + "/" + label + " [hall:create:remove:team]");
