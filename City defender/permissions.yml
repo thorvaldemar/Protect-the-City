@@ -1,0 +1,52 @@
+# 
+#    Permissions   #
+Permissions:
+  broadcast: true
+  selector: true
+  protectcity:
+    hall: true
+    control: true
+    team: true
+  permissions:
+    set: true
+    players: true
+    ranks: true
+  chat:
+    color: true
+    prefix: true
+  signs:
+    color: true
+  renameitem: true
+Ranks:
+  noob:
+    permissions:
+    - chat.prefix
+    options:
+      prefix: '&eNoob'
+  member:
+    permissions:
+    - protectcity.*
+    - chat.prefix
+    options:
+      prefix: '&2Member'
+  ultra:
+    permissions:
+    - protectcity.*
+    - chat.prefix
+    options:
+      prefix: '&6Ultra'
+  admin:
+    permissions:
+    - broadcast
+    - protectcity.*
+    - chat.*
+    - signs.*
+    - permissions.set
+    - renameitem
+    options:
+      prefix: '&4Admin'
+  owner:
+    permissions:
+    - chat.*
+    options:
+      prefix: '&5&lOwner'

@@ -1,0 +1,9 @@
+####################
+#      Players     #
+####################
+
+thorvaldemar:
+  rank: member
+  personalPermissions:
+    - perm2
+    - perm4.underPerm3

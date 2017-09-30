@@ -18,7 +18,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class Selector implements Listener {
-
+	
 	static HashMap<Player, ArrayList<Slime>> canBePlaced = new HashMap<Player, ArrayList<Slime>>();
 	static HashMap<Player, ArrayList<MagmaCube>> cantBePlaced = new HashMap<Player, ArrayList<MagmaCube>>();
 	static HashMap<Player, Boolean> selector = new HashMap<Player, Boolean>();
@@ -28,13 +28,14 @@ public class Selector implements Listener {
 		Player p = e.getPlayer();
 		Block block = p.getTargetBlock((Set<Material>) null, 100);
 
-		//p.sendMessage((block.getX() - (block.getX() % 9)) + ", " + (block.getZ() - (block.getZ() % 9)));
-		
-//		if (!selector.containsKey(p) || !selector.get(p)) {
-//			summonGlowers(p, block);
-//			selector.put(p, true);
-//		}
-		
+		// p.sendMessage((block.getX() - (block.getX() % 9)) + ", " + (block.getZ() -
+		// (block.getZ() % 9)));
+
+		// if (!selector.containsKey(p) || !selector.get(p)) {
+		// summonGlowers(p, block);
+		// selector.put(p, true);
+		// }
+
 		if (!hasEntity(block)) {
 			if (selector.containsKey(p)) {
 				if (selector.get(p)) {
@@ -49,7 +50,7 @@ public class Selector implements Listener {
 			return true;
 		return false;
 	}
-	
+
 	public static boolean addPlayer(Player p) {
 		if (!contains(p)) {
 			Block block = p.getTargetBlock((Set<Material>) null, 100);
@@ -59,7 +60,7 @@ public class Selector implements Listener {
 		}
 		return false;
 	}
-	
+
 	public static boolean removePlayer(Player p) {
 		if (contains(p)) {
 			removeAllShulkers(p);
@@ -68,33 +69,34 @@ public class Selector implements Listener {
 		}
 		return false;
 	}
-	
+
 	void update(Player p, Block block) {
 		int x = (block.getX() - (block.getX() % 9));
 		int z = (block.getZ() - (block.getZ() % 9));
 
 		int ix = x;
 		int iz = z;
-		
+
 		if (isFree(new Location(block.getWorld(), x, 56, iz).getBlock())) {
 			for (int i = 0; i < canBePlaced.get(p).size(); i++) {
 				canBePlaced.get(p).get(i).addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 0, 0), true);
-				cantBePlaced.get(p).get(i).addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 999999, 10), true);
+				cantBePlaced.get(p).get(i).addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 999999, 10),
+						true);
 			}
 		} else {
 			for (int i = 0; i < canBePlaced.get(p).size(); i++) {
-				canBePlaced.get(p).get(i).addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 999999, 10), true);
+				canBePlaced.get(p).get(i).addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 999999, 10),
+						true);
 				cantBePlaced.get(p).get(i).addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 0, 0), true);
 			}
 		}
-		
-		
+
 		for (int i = 0; i < canBePlaced.get(p).size(); i++) {
-			canBePlaced.get(p).get(i).teleport(new Location(block.getWorld(), (ix+0.5), 56+0.1, (iz+0.5)));
-			cantBePlaced.get(p).get(i).teleport(new Location(block.getWorld(), (ix+0.5), 56+0.1, (iz+0.5)));
-			if (ix < (x+8)) {
+			canBePlaced.get(p).get(i).teleport(new Location(block.getWorld(), (ix + 0.5), 56 + 0.1, (iz + 0.5)));
+			cantBePlaced.get(p).get(i).teleport(new Location(block.getWorld(), (ix + 0.5), 56 + 0.1, (iz + 0.5)));
+			if (ix < (x + 8)) {
 				ix++;
-			} else if (iz < (z+9)) {
+			} else if (iz < (z + 9)) {
 				iz++;
 				ix = x;
 			} else {
@@ -106,29 +108,31 @@ public class Selector implements Listener {
 	static void summonGlowers(Player p, Block block) {
 		ArrayList<Slime> sul = new ArrayList<Slime>();
 		ArrayList<MagmaCube> aSul = new ArrayList<MagmaCube>();
-		
+
 		for (int x = 999; x < (999 + 9); x++) {
 			for (int z = 999; z < (999 + 9); z++) {
 				Slime glower = p.getWorld().spawn(new Location(p.getWorld(), x, 56, z), Slime.class);
-				//p.sendMessage(x + ", " + z);
-				//glower.setGlowing(true);
+				// p.sendMessage(x + ", " + z);
+				// glower.setGlowing(true);
 				glower.setSilent(true);
 				glower.setAI(false);
 				glower.setInvulnerable(true);
 				glower.setSize(2);
-				//glower.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 999999, 10), true);
+				// glower.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,
+				// 999999, 10), true);
 				sul.add(glower);
 			}
 		}
 		for (int x = 999; x < (999 + 9); x++) {
 			for (int z = 999; z < (999 + 9); z++) {
 				MagmaCube glower = p.getWorld().spawn(new Location(p.getWorld(), x, 56, z), MagmaCube.class);
-				//p.sendMessage(x + ", " + z);
+				// p.sendMessage(x + ", " + z);
 				glower.setSilent(true);
 				glower.setAI(false);
 				glower.setInvulnerable(true);
 				glower.setSize(2);
-				//glower.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 999999, 10), true);
+				// glower.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,
+				// 999999, 10), true);
 				aSul.add(glower);
 			}
 		}
@@ -138,11 +142,13 @@ public class Selector implements Listener {
 
 	public static void removeAllShulkers(Player p) {
 		for (int t = 0; t <= 6; t++) {
-			for (int i = 0; i < canBePlaced.get(p).size(); i++) {
-				canBePlaced.get(p).get(i).remove();
-			}
-			for (int i = 0; i < cantBePlaced.get(p).size(); i++) {
-				cantBePlaced.get(p).get(i).remove();
+			if (canBePlaced.containsKey(p)) {
+				for (int i = 0; i < canBePlaced.get(p).size(); i++) {
+					canBePlaced.get(p).get(i).remove();
+				}
+				for (int i = 0; i < cantBePlaced.get(p).size(); i++) {
+					cantBePlaced.get(p).get(i).remove();
+				}
 			}
 		}
 		canBePlaced.remove(p);
@@ -161,7 +167,7 @@ public class Selector implements Listener {
 		}
 		return true;
 	}
-	
+
 	boolean hasEntity(Block block) {
 		for (Entity entity : block.getWorld().getEntities()) {
 			if (entity.getLocation().equals(

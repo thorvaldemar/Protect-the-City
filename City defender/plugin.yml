@@ -11,3 +11,7 @@ commands:
     description: main commands
   protectcity:
     description: main commands
+  permissions:
+    description: manipulating permissions
+  renameitem:
+    description: Give an item a colored name
